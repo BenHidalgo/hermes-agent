@@ -42,6 +42,44 @@ echo "🏰 Building throne at ~/.nazzar/..."
 mkdir -p "$NAZZAR_HOME"/{skills,scripts,sessions,cron/output,skins,logs}
 mkdir -p "$NAZZAR_HOME"/gateway
 
+# ── Auto-migrate from ~/.hermes/ if present ────────────────────────────
+if [ -d "$HOME/.hermes" ] && [ ! -f "$NAZZAR_HOME/.migrated" ]; then
+    echo "🔄 Detected existing ~/.hermes/ — migrating to ~/.nazzar/..."
+    echo ""
+    echo "  The following will be copied:"
+    echo "  - config.yaml  (settings)"
+    echo "  - .env         (API keys, redacted)"
+    echo "  - SOUL.md      (identity)"
+    echo "  - skills/      (your skills)"
+    echo "  - scripts/     (your scripts)"
+    echo "  - sessions/    (conversation history)"
+    echo ""
+    echo "  ~/.hermes/ will NOT be deleted. Both coexist."
+    echo ""
+
+    # Migrate config
+    [ -f "$HOME/.hermes/config.yaml" ] && cp "$HOME/.hermes/config.yaml" "$NAZZAR_HOME/config.yaml"
+    
+    # Migrate .env (redact keys from output)
+    if [ -f "$HOME/.hermes/.env" ]; then
+        cp "$HOME/.hermes/.env" "$NAZZAR_HOME/.env"
+        echo "  ✅ .env migrated (keys preserved)"
+    fi
+    
+    # Migrate SOUL.md
+    [ -f "$HOME/.hermes/SOUL.md" ] && cp "$HOME/.hermes/SOUL.md" "$NAZZAR_HOME/SOUL.md"
+    
+    # Migrate skills, scripts, sessions (non-destructive copy)
+    [ -d "$HOME/.hermes/skills" ] && cp -rn "$HOME/.hermes/skills"/* "$NAZZAR_HOME/skills/" 2>/dev/null || true
+    [ -d "$HOME/.hermes/scripts" ] && cp -rn "$HOME/.hermes/scripts"/* "$NAZZAR_HOME/scripts/" 2>/dev/null || true
+    [ -d "$HOME/.hermes/sessions" ] && cp -rn "$HOME/.hermes/sessions"/* "$NAZZAR_HOME/sessions/" 2>/dev/null || true
+    
+    # Mark migrated so it doesn't re-copy
+    touch "$NAZZAR_HOME/.migrated"
+    echo "  ✅ Migration complete. ~/.hermes/ still intact as backup."
+    echo ""
+fi
+
 # Default config
 if [ ! -f "$NAZZAR_HOME/config.yaml" ]; then
     cp "$NAZAR_REPO/nazar_cli/default_config.yaml" "$NAZZAR_HOME/config.yaml" 2>/dev/null || true
