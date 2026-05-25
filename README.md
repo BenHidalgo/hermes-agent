@@ -1,4 +1,4 @@
-# 🧿 Nazar Agent
+# 🧿 Nazar Empire
 
 **The watcher. The executor. Your agent.**
 

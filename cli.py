@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Nazar Agent CLI - Interactive Terminal Interface
+Nazar Empire CLI - Interactive Terminal Interface
 
 A beautiful command-line interface for the Nazar Agent, inspired by Claude Code.
 Features ASCII art branding, interactive REPL, toolset selection, and rich formatting.
@@ -3175,7 +3175,7 @@ class HermesCLI:
         _run_state_db_auto_maintenance(self._session_db)
 
         # Opportunistic shadow-repo cleanup — deletes orphan/stale
-        # checkpoint repos under ~/.hermes/checkpoints/.  Opt-in via
+        # checkpoint repos under ~/.nazzar/checkpoints/.  Opt-in via
         # checkpoints.auto_prune, idempotent via .last_prune marker.
         _run_checkpoint_auto_maintenance()
 
@@ -14747,7 +14747,7 @@ def main(
     ignore_rules: bool = False,
 ):
     """
-    Nazar Agent CLI - Interactive AI Assistant
+    Nazar Empire CLI - Interactive AI Assistant
     
     Args:
         query: Single query to execute (then exit). Alias: -q

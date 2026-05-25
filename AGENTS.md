@@ -1,4 +1,4 @@
-# 🧿 Nazar Agent — AGENTS.md
+# 🧿 Nazar Empire — AGENTS.md
 # Edit this file to shape how your agent operates day-to-day.
 # Loaded every session as operational context.
 
