@@ -847,7 +847,7 @@ def kanban_command(args: argparse.Namespace) -> int:
         else:
             print(
                 "usage: hermes kanban <action> [options]\n"
-                "Run 'hermes kanban --help' for the full list of actions.",
+                "Run 'nazar kanban --help' for the full list of actions.",
                 file=sys.stderr,
             )
         return 0
@@ -1426,7 +1426,7 @@ def _cmd_list(args: argparse.Namespace) -> int:
         print(
             f"Board: {current} "
             f"({other_count} other board{'s' if other_count != 1 else ''} — "
-            f"`hermes kanban boards list`)\n"
+            f"`nazar kanban boards list`)\n"
         )
     if not tasks:
         print("(no matching tasks)")
@@ -2224,8 +2224,8 @@ def _cmd_daemon(args: argparse.Namespace) -> int:
                     f"ready queue non-empty for {health_state['bad_ticks']} "
                     f"consecutive ticks but 0 workers spawned successfully. "
                     f"Check profile health (venv, PATH, credentials) and "
-                    f"`hermes kanban list --status ready` / "
-                    f"`hermes kanban list --status blocked` for recent "
+                    f"`nazar kanban list --status ready` / "
+                    f"`nazar kanban list --status blocked` for recent "
                     f"spawn_failed tasks.",
                     file=sys.stderr, flush=True,
                 )

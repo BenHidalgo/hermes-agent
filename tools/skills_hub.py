@@ -3181,7 +3181,7 @@ def check_for_skill_updates(
 # ---------------------------------------------------------------------------
 
 HERMES_INDEX_URL = "https://hermes-agent.nousresearch.com/docs/api/skills-index.json"
-HERMES_INDEX_CACHE_FILE = INDEX_CACHE_DIR / "hermes-index.json"
+HERMES_INDEX_CACHE_FILE = INDEX_CACHE_DIR / "nazar-index.json"
 HERMES_INDEX_TTL = 6 * 3600  # 6 hours
 
 
@@ -3205,11 +3205,11 @@ def _load_hermes_index() -> Optional[dict]:
     try:
         resp = httpx.get(HERMES_INDEX_URL, timeout=15, follow_redirects=True)
         if resp.status_code != 200:
-            logger.debug("Hermes index fetch returned %d", resp.status_code)
+            logger.debug("Nazar index fetch returned %d", resp.status_code)
             return _load_stale_index_cache()
         data = resp.json()
     except (httpx.HTTPError, json.JSONDecodeError) as e:
-        logger.debug("Hermes index fetch failed: %s", e)
+        logger.debug("Nazar index fetch failed: %s", e)
         return _load_stale_index_cache()
 
     # Validate structure
@@ -3268,7 +3268,7 @@ class HermesIndexSource(SkillSource):
         return self._github
 
     def source_id(self) -> str:
-        return "hermes-index"
+        return "nazar-index"
 
     @property
     def is_available(self) -> bool:
@@ -3322,7 +3322,7 @@ class HermesIndexSource(SkillSource):
         if resolved:
             bundle = self._get_github().fetch(resolved)
             if bundle:
-                bundle.source = entry.get("source", "hermes-index")
+                bundle.source = entry.get("source", "nazar-index")
                 bundle.identifier = identifier
                 return bundle
 
@@ -3333,7 +3333,7 @@ class HermesIndexSource(SkillSource):
             github_id = f"{repo}/{path}"
             bundle = self._get_github().fetch(github_id)
             if bundle:
-                bundle.source = entry.get("source", "hermes-index")
+                bundle.source = entry.get("source", "nazar-index")
                 bundle.identifier = identifier
                 return bundle
 
@@ -3382,7 +3382,7 @@ class HermesIndexSource(SkillSource):
         return SkillMeta(
             name=entry.get("name", ""),
             description=entry.get("description", ""),
-            source=entry.get("source", "hermes-index"),
+            source=entry.get("source", "nazar-index"),
             identifier=entry.get("identifier", ""),
             trust_level=entry.get("trust_level", "community"),
             repo=entry.get("repo"),
@@ -3459,7 +3459,7 @@ def parallel_search_sources(
                                   "claude-marketplace", "lobehub", "well-known"})
     if source_filter == "all":
         for src in sources:
-            if (src.source_id() == "hermes-index"
+            if (src.source_id() == "nazar-index"
                     and getattr(src, "is_available", False)):
                 _index_available = True
                 break

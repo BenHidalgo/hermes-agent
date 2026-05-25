@@ -177,7 +177,7 @@ def _warn_if_gateway_running(auto_yes: bool) -> None:
         "conflicts (Telegram, Discord, and Slack only allow one active "
         "session per token)."
     )
-    print_info("Recommendation: stop the gateway first with 'hermes stop'.")
+    print_info("Recommendation: stop the gateway first with 'nazar stop'.")
     print()
     if not auto_yes and not prompt_yes_no("Continue anyway?", default=False):
         print_info("Migration cancelled. Stop the gateway and try again.")
@@ -307,7 +307,7 @@ def claw_command(args):
         print("  migrate          Migrate settings from OpenClaw to Hermes")
         print("  cleanup          Archive leftover OpenClaw directories after migration")
         print()
-        print("Run 'hermes claw <command> --help' for options.")
+        print("Run 'nazar claw <command> --help' for options.")
 
 
 def _cmd_migrate(args):
@@ -552,7 +552,7 @@ def _cmd_migrate(args):
 
     # Source directory is left untouched — archiving is not the migration
     # tool's responsibility.  Users who want to clean up can run
-    # 'hermes claw cleanup' separately.
+    # 'nazar claw cleanup' separately.
 
 
 def _cmd_cleanup(args):

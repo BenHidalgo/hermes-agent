@@ -6,7 +6,7 @@ Subcommands:
   tools    List Tool Gateway tools and which are active in the current config.
 
 This command is intentionally minimal — it does not duplicate functionality
-already in ``hermes auth`` or ``hermes tools``. It's a discovery + status
+already in ``hermes auth`` or ``nazar tools``. It's a discovery + status
 surface for the Portal subscription itself.
 """
 from __future__ import annotations
@@ -71,7 +71,7 @@ def _cmd_status(args) -> int:
     if provider == "nous":
         print(f"  Model:   {color('✓ using Nous as inference provider', Colors.GREEN)}")
     elif provider:
-        print(f"  Model:   currently {provider} (switch with `hermes model`)")
+        print(f"  Model:   currently {provider} (switch with `nazar model`)")
 
     # Tool Gateway routing
     print()

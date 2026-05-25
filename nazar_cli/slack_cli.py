@@ -109,12 +109,12 @@ def slack_manifest_command(args) -> int:
     Flags (all parsed in ``hermes_cli/main.py``):
       --write [PATH]  Write to file instead of stdout (default path:
                       ``$NAZAR_HOME/slack-manifest.json``)
-      --name NAME     Override the bot display name (default: "Hermes")
+      --name NAME     Override the bot display name (default: "Nazar")
       --description DESC  Override the bot description
       --slashes-only  Emit only the ``features.slash_commands`` array (for
                       merging into an existing manifest manually)
     """
-    name = getattr(args, "name", None) or "Hermes"
+    name = getattr(args, "name", None) or "Nazar"
     description = getattr(args, "description", None) or "Your Hermes agent on Slack"
 
     if getattr(args, "slashes_only", False):
@@ -151,7 +151,7 @@ def slack_manifest_command(args) -> int:
             "     slash commands changed.\n"
             "  4. Make sure Socket Mode is enabled and you have a bot token\n"
             "     (xoxb-...) and app token (xapp-...) configured via\n"
-            "     `hermes setup`.\n",
+            "     `nazar setup`.\n",
             file=sys.stderr,
         )
     else:

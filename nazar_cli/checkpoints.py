@@ -1,4 +1,4 @@
-"""`hermes checkpoints` CLI subcommand.
+"""`nazar checkpoints` CLI subcommand.
 
 Gives users direct visibility and control over the filesystem checkpoint
 store at ``~/.hermes/checkpoints/``.  Actions:

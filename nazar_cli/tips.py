@@ -151,7 +151,7 @@ TIPS = [
 
     # --- Profiles ---
     "Each profile gets its own config, API keys, memory, sessions, skills, and cron jobs.",
-    "Profile names become shell commands — 'hermes profile create coder' creates the 'coder' command.",
+    "Profile names become shell commands — 'nazar profile create coder' creates the 'coder' command.",
     "hermes profile export coder -o backup.tar.gz creates a portable profile archive.",
     "If two profiles accidentally share a bot token, the second gateway is blocked with a clear error.",
 
@@ -317,7 +317,7 @@ TIPS = [
     "When compression fails, further attempts are paused for 10 minutes to avoid API hammering.",
     "Long dangerous commands (>70 chars) get a 'view' option in the approval prompt to see the full text first.",
     "Audio level visualization shows ▁▂▃▄▅▆▇ bars during voice recording based on microphone RMS levels.",
-    "Profile names cannot collide with existing PATH binaries — 'hermes profile create ls' would be rejected.",
+    "Profile names cannot collide with existing PATH binaries — 'nazar profile create ls' would be rejected.",
     "hermes profile create backup --clone-all copies everything (config, keys, SOUL.md, memories, skills, sessions).",
     "The voice record key is configurable via voice.record_key in config.yaml — not just Ctrl+B.",
     ".cursorrules and .cursor/rules/*.mdc files are auto-detected and loaded as project context.",
@@ -361,12 +361,12 @@ TIPS = [
     'Drop a ~/.hermes/BOOT.md checklist and a gateway:startup hook runs it as a one-shot agent every boot.',
 
     # --- Curator ---
-    'hermes curator run --dry-run previews what the curator would archive or consolidate without mutating anything.',
+    'nazar curator run --dry-run previews what the curator would archive or consolidate without mutating anything.',
     "hermes curator pin <skill> hard-fences a skill against both auto-archival and the agent's skill_manage tool.",
-    'hermes curator rollback restores skills from a pre-run snapshot — backups live under skills/.curator_backups/.',
+    'nazar curator rollback restores skills from a pre-run snapshot — backups live under skills/.curator_backups/.',
 
     # --- Credential Pools & Routing ---
-    'hermes auth reset <provider> clears all cooldowns and exhaustion flags on a credential pool.',
+    'nazar auth reset <provider> clears all cooldowns and exhaustion flags on a credential pool.',
     'credential_pool_strategies.<provider>: round_robin cycles keys evenly instead of the fill_first default.',
     'use_gateway: true per-tool routes web, image, tts, or browser through your Nous subscription — no extra keys.',
     'provider_routing.data_collection: deny excludes data-storing providers on OpenRouter.',
@@ -377,8 +377,8 @@ TIPS = [
     "HERMES_TUI_THEME=light|dark|<hex> forces the TUI theme on terminals that don't set COLORFGBG.",
     'Ctrl+G or Ctrl+X Ctrl+E in the TUI opens the input buffer in $EDITOR for long multi-line prompts.',
     'The TUI renders LaTeX inline — $E=mc^2$ becomes Unicode math instead of raw TeX.',
-    'hermes dashboard launches a local web UI at 127.0.0.1:9119 — zero data leaves localhost.',
-    'hermes dashboard --tui embeds the full Hermes TUI in your browser via xterm.js and a WebSocket PTY.',
+    'nazar dashboard launches a local web UI at 127.0.0.1:9119 — zero data leaves localhost.',
+    'nazar dashboard --tui embeds the full Hermes TUI in your browser via xterm.js and a WebSocket PTY.',
     'Drop a YAML in ~/.hermes/dashboard-themes/ with two palette colors to reskin the entire dashboard.',
     'Dashboard plugins are drop-in: manifest.json + JS bundle in ~/.hermes/dashboard-plugins/ — no npm build required.',
     'layoutVariant: cockpit in a dashboard theme adds a 260px left rail that plugins can populate via the sidebar slot.',
@@ -424,18 +424,18 @@ TIPS = [
     '/debug uploads a support bundle (system info + logs) and returns shareable links — works in chat too.',
 
     # --- CLI Subcommands & Flags ---
-    'hermes -z "<prompt>" is the purest one-shot: final answer on stdout, nothing else — ideal for piping in scripts.',
-    'hermes chat --pass-session-id injects the session ID into the system prompt so the agent can self-reference it.',
-    'hermes chat --image path/to/pic.png attaches a local image to a single -q query without a separate upload step.',
-    'hermes chat --ignore-user-config skips ~/.hermes/config.yaml — reproducible bug reports and CI runs.',
+    'nazar -z "<prompt>" is the purest one-shot: final answer on stdout, nothing else — ideal for piping in scripts.',
+    'nazar chat --pass-session-id injects the session ID into the system prompt so the agent can self-reference it.',
+    'nazar chat --image path/to/pic.png attaches a local image to a single -q query without a separate upload step.',
+    'nazar chat --ignore-user-config skips ~/.hermes/config.yaml — reproducible bug reports and CI runs.',
     "hermes chat --source tool tags programmatic chats so they don't clutter hermes sessions list.",
-    'hermes dump --show-keys includes redacted API key fingerprints for deeper support debugging.',
-    'hermes sessions rename <ID> "new title" renames any past session; hermes sessions delete <ID> removes one.',
-    'hermes import restores a session export or profile archive produced by sessions export or profile export.',
-    'hermes fallback manages the fallback_model chain interactively — no hand-editing config.yaml.',
-    'hermes pairing rotates the DM pairing token — the first messager after rotation claims access to the bot.',
-    'hermes setup walks first-time users through provider, keys, and platform wiring in one interactive flow.',
-    'hermes status --deep runs the full health sweep across every component; plain hermes status is the quick view.',
+    'nazar dump --show-keys includes redacted API key fingerprints for deeper support debugging.',
+    'nazar sessions rename <ID> "new title" renames any past session; hermes sessions delete <ID> removes one.',
+    'nazar import restores a session export or profile archive produced by sessions export or profile export.',
+    'nazar fallback manages the fallback_model chain interactively — no hand-editing config.yaml.',
+    'nazar pairing rotates the DM pairing token — the first messager after rotation claims access to the bot.',
+    'nazar setup walks first-time users through provider, keys, and platform wiring in one interactive flow.',
+    'nazar status --deep runs the full health sweep across every component; plain hermes status is the quick view.',
 
     # --- Agent Behavior Env Vars ---
     'HERMES_AGENT_TIMEOUT=0 disables the gateway inactivity kill for a running agent — use for long research runs.',

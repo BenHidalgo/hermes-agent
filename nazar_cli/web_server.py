@@ -731,7 +731,7 @@ async def restart_gateway():
 
 @app.post("/api/hermes/update")
 async def update_hermes():
-    """Kick off ``hermes update`` in the background."""
+    """Kick off ``nazar update`` in the background."""
     try:
         proc = _spawn_hermes_action(["update"], "hermes-update")
     except Exception as exc:

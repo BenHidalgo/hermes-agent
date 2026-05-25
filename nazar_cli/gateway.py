@@ -32,7 +32,7 @@ from nazar_cli.config import (
     save_env_value,
 )
 # display_hermes_home is imported lazily at call sites to avoid ImportError
-# when hermes_constants is cached from a pre-update version during `hermes update`.
+# when hermes_constants is cached from a pre-update version during `nazar update`.
 from nazar_cli.setup import (
     print_header, print_info, print_success, print_warning, print_error,
     prompt, prompt_choice, prompt_yes_no,
@@ -515,7 +515,7 @@ def find_gateway_pids(exclude_pids: set | None = None, all_profiles: bool = Fals
         exclude_pids: PIDs to exclude from the result (e.g. service-managed
             PIDs that should not be killed during a stale-process sweep).
         all_profiles: When ``True``, return gateway PIDs across **all**
-            profiles (the pre-7923 global behaviour).  ``hermes update``
+            profiles (the pre-7923 global behaviour).  ``nazar update``
             needs this because a code update affects every profile.
             When ``False`` (default), only PIDs belonging to the current
             Hermes profile are returned.
@@ -584,7 +584,7 @@ def launch_detached_profile_gateway_restart(profile: str, old_pid: int) -> bool:
     #
     # Windows — ``start_new_session`` is silently accepted but does NOT
     # detach.  The watcher stays attached to the CLI's console and dies
-    # when the user closes the terminal, leaving ``hermes update`` users
+    # when the user closes the terminal, leaving ``nazar update`` users
     # with no running gateway until they re-invoke ``hermes gateway``
     # manually.  The Win32 equivalent is the ``CREATE_NEW_PROCESS_GROUP |
     # DETACHED_PROCESS | CREATE_NO_WINDOW`` creationflags bundle.
@@ -3915,7 +3915,7 @@ def _setup_standard_platform(platform: dict):
                 print()
                 access_choices = [
                     "Enable open access (anyone can message the bot)",
-                    "Use DM pairing (unknown users request access, you approve with 'hermes pairing approve')",
+                    "Use DM pairing (unknown users request access, you approve with 'nazar pairing approve')",
                     "Skip for now (bot will deny all users until configured)",
                 ]
                 access_idx = prompt_choice("  How should unauthorized users be handled?", access_choices, 1)
@@ -3926,7 +3926,7 @@ def _setup_standard_platform(platform: dict):
                     print_success("  DM pairing mode — users will receive a code to request access.")
                     print_info("  Approve with: hermes pairing approve <platform> <code>")
                 else:
-                    print_info("  Skipped — configure later with 'hermes gateway setup'")
+                    print_info("  Skipped — configure later with 'nazar gateway setup'")
             continue
 
         value = prompt(f"  {var['prompt']}", password=var.get("password", False))
@@ -4113,7 +4113,7 @@ def _setup_wecom():
         print()
         access_choices = [
             "Enable open access (anyone can message the bot)",
-            "Use DM pairing (unknown users request access, you approve with 'hermes pairing approve')",
+            "Use DM pairing (unknown users request access, you approve with 'nazar pairing approve')",
             "Disable direct messages",
             "Skip for now (bot will deny all users until configured)",
         ]
@@ -4130,7 +4130,7 @@ def _setup_wecom():
             save_env_value("WECOM_DM_POLICY", "disabled")
             print_warning("  Direct messages disabled.")
         else:
-            print_info("  Skipped — configure later with 'hermes gateway setup'")
+            print_info("  Skipped — configure later with 'nazar gateway setup'")
 
     # ── Home channel (optional) ──
     print()
@@ -4237,7 +4237,7 @@ def _setup_weixin():
 
     if not check_weixin_requirements():
         print_error("  Missing dependencies: Weixin needs aiohttp and cryptography.")
-        print_info("  Install them, then rerun `hermes gateway setup`.")
+        print_info("  Install them, then rerun `nazar gateway setup`.")
         return
 
     print()
@@ -5006,7 +5006,7 @@ def gateway_setup():
             elif is_wsl():
                 print_info("  WSL detected but systemd is not running.")
                 print_info("  Run in foreground: hermes gateway run")
-                print_info("  For persistence:   tmux new -s hermes 'hermes gateway run'")
+                print_info("  For persistence:   tmux new -s hermes 'nazar gateway run'")
                 print_info("  To enable systemd: add systemd=true to /etc/wsl.conf, then 'wsl --shutdown'")
             elif is_termux():
                 from nazar_constants import display_hermes_home as _dhh
@@ -5018,7 +5018,7 @@ def gateway_setup():
                 print_info("  Run in foreground: hermes gateway run")
     else:
         print()
-        print_info("No platforms configured. Run 'hermes gateway setup' when ready.")
+        print_info("No platforms configured. Run 'nazar gateway setup' when ready.")
 
     print()
 
@@ -5181,7 +5181,7 @@ def _gateway_command_inner(args):
             if is_wsl():
                 print_warning("WSL detected — systemd services may not survive WSL restarts.")
                 print_info("  Consider running in foreground instead: hermes gateway run")
-                print_info("  Or use tmux/screen for persistence: tmux new -s hermes 'hermes gateway run'")
+                print_info("  Or use tmux/screen for persistence: tmux new -s hermes 'nazar gateway run'")
                 print()
             start_now = prompt_yes_no("Start the gateway now after installing the service?", True)
             start_on_login = prompt_yes_no("Start the gateway automatically on login/boot with systemd?", True)
@@ -5209,7 +5209,7 @@ def _gateway_command_inner(args):
             print("or run the gateway in foreground mode:")
             print()
             print("  hermes gateway run                              # direct foreground")
-            print("  tmux new -s hermes 'hermes gateway run'         # persistent via tmux")
+            print("  tmux new -s hermes 'nazar gateway run'         # persistent via tmux")
             print("  nohup hermes gateway run > ~/.hermes/logs/gateway.log 2>&1 &  # background")
             sys.exit(1)
         elif is_container():
@@ -5310,7 +5310,7 @@ def _gateway_command_inner(args):
             print("Run the gateway in foreground mode instead:")
             print()
             print("  hermes gateway run                              # direct foreground")
-            print("  tmux new -s hermes 'hermes gateway run'         # persistent via tmux")
+            print("  tmux new -s hermes 'nazar gateway run'         # persistent via tmux")
             print("  nohup hermes gateway run > ~/.hermes/logs/gateway.log 2>&1 &  # background")
             print()
             print("To enable systemd: add systemd=true to /etc/wsl.conf and run 'wsl --shutdown' from PowerShell.")
@@ -5599,7 +5599,7 @@ def _gateway_command_inner(args):
                 if is_termux():
                     print("  nohup hermes gateway run > ~/.hermes/logs/gateway.log 2>&1 &  # Best-effort background start")
                 elif is_wsl():
-                    print("  tmux new -s hermes 'hermes gateway run'         # persistent via tmux")
+                    print("  tmux new -s hermes 'nazar gateway run'         # persistent via tmux")
                     print("  nohup hermes gateway run > ~/.hermes/logs/gateway.log 2>&1 &  # background")
                 elif is_windows():
                     print("  hermes gateway install  # Install as Windows Scheduled Task (auto-start on login)")

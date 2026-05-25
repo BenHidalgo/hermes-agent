@@ -228,7 +228,7 @@ _hermes() {{
             subcmds=(
 {top_cmds_str}
             )
-            _describe 'hermes command' subcmds
+            _describe 'nazar command' subcmds
             ;;
         args)
             case ${{line[1]}} in

@@ -495,7 +495,7 @@ class WhatsAppAdapter(BasePlatformAdapter):
             logger.warning("[%s] Node.js not found. WhatsApp requires Node.js.", self.name)
             self._set_fatal_error(
                 "whatsapp_node_missing",
-                "Node.js is not installed — install Node.js and re-run `hermes gateway`.",
+                "Node.js is not installed — install Node.js and re-run `nazar gateway`.",
                 retryable=False,
             )
             return False
@@ -527,7 +527,7 @@ class WhatsAppAdapter(BasePlatformAdapter):
             )
             self._set_fatal_error(
                 "whatsapp_not_paired",
-                "WhatsApp enabled but not paired — run `hermes whatsapp` to pair.",
+                "WhatsApp enabled but not paired — run `nazar whatsapp` to pair.",
                 retryable=False,
             )
             return False

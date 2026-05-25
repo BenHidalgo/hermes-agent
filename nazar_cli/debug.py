@@ -703,7 +703,7 @@ def run_debug_delete(args):
     urls = getattr(args, "urls", [])
     if not urls:
         print("Usage: hermes debug delete <url> [<url> ...]")
-        print("  Deletes paste.rs pastes uploaded by 'hermes debug share'.")
+        print("  Deletes paste.rs pastes uploaded by 'nazar debug share'.")
         return
 
     for url in urls:

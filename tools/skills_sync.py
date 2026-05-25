@@ -407,7 +407,7 @@ def reset_bundled_skill(name: str, restore: bool = False) -> dict:
     else:
         action = "manifest_cleared"
         message = (
-            f"Cleared manifest entry for '{name}'. Future `hermes update` runs "
+            f"Cleared manifest entry for '{name}'. Future `nazar update` runs "
             f"will re-baseline against your current copy and accept upstream changes."
         )
 

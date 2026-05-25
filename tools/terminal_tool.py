@@ -1187,7 +1187,7 @@ def _create_environment(env_type: str, image: str, cwd: str, timeout: int,
                 raise ValueError(
                     "Modal backend is configured for managed mode, but "
                     "a paid Nous subscription is required for the Tool Gateway and no direct "
-                    "Modal credentials/config were found. Log in with `hermes model` or "
+                    "Modal credentials/config were found. Log in with `nazar model` or "
                     "choose TERMINAL_MODAL_MODE=direct/auto."
                 )
             if modal_state["mode"] == "managed":
@@ -2220,7 +2220,7 @@ def check_terminal_requirements() -> bool:
                     logger.error(
                         "Modal backend selected with TERMINAL_MODAL_MODE=managed, but "
                         "a paid Nous subscription is required for the Tool Gateway and no direct "
-                        "Modal credentials/config were found. Log in with `hermes model` "
+                        "Modal credentials/config were found. Log in with `nazar model` "
                         "or choose TERMINAL_MODAL_MODE=direct/auto."
                     )
                     return False

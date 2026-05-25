@@ -113,7 +113,7 @@ class ToolEntry:
 # probe external state (Docker daemon, Modal SDK install, playwright binary
 # availability). For a long-lived CLI or gateway process, calling them on
 # every get_definitions() is pure waste — external state changes on human
-# timescales. Cache results for ~30 s so env-var flips via ``hermes tools``
+# timescales. Cache results for ~30 s so env-var flips via ``nazar tools``
 # or live credential file changes propagate within a turn or two without
 # requiring any explicit invalidation.
 # ---------------------------------------------------------------------------
