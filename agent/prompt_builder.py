@@ -1324,7 +1324,32 @@ def _load_hermes_md(cwd_path: Path) -> str:
 
 
 def _load_agents_md(cwd_path: Path) -> str:
-    """AGENTS.md — disabled for Nazar (dev guide, not operational)."""
+    """AGENTS.md — check NAZZAR_HOME first, fall back to cwd."""
+    # Check throne directory (~/.nazzar/) first
+    try:
+        from nazar_constants import get_nazar_home
+        throne = get_nazar_home() / "AGENTS.md"
+        if throne.exists():
+            content = throne.read_text(encoding="utf-8").strip()
+            if content:
+                content = _scan_context_content(content, "AGENTS.md")
+                result = f"## AGENTS.md\n\n{content}"
+                return _truncate_content(result, "AGENTS.md")
+    except Exception as e:
+        logger.debug("Could not read throne AGENTS.md: %s", e)
+
+    # Fall back to cwd (workspace compatibility)
+    for name in ["AGENTS.md", "agents.md"]:
+        candidate = cwd_path / name
+        if candidate.exists():
+            try:
+                content = candidate.read_text(encoding="utf-8").strip()
+                if content:
+                    content = _scan_context_content(content, name)
+                    result = f"## {name}\n\n{content}"
+                    return _truncate_content(result, "AGENTS.md")
+            except Exception as e:
+                logger.debug("Could not read %s: %s", candidate, e)
     return ""
 
 def _load_claude_md(cwd_path: Path) -> str:

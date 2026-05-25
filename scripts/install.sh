@@ -63,6 +63,64 @@ if [ ! -f "$NAZZAR_HOME/.env" ]; then
 EOF
 fi
 
+# AGENTS.md — operational instructions
+if [ ! -f "$NAZZAR_HOME/AGENTS.md" ]; then
+    cat > "$NAZZAR_HOME/AGENTS.md" << 'EOF'
+# 🧿 Nazar Agent — AGENTS.md
+# Edit this file to shape how your agent operates day-to-day.
+# Loaded every session as operational context.
+
+## Behavior
+- Proactive, not passive. Flag risks before they become problems.
+- Keep responses tight. One screen, no scroll.
+- Use tools aggressively — don't describe, execute.
+- When context hits 85%, run recap and deliver fresh picture.
+
+## Communication
+- Direct. No fluff. No apologies.
+- With your operator: warm, loyal.
+- With others (when authorized): straight intellectual, professional.
+
+## Stack
+- Model: DeepSeek V4 Flash
+- Storage: ~/.nazzar/
+- Platforms: Telegram, WhatsApp, WeChat, QQ, Signal
+EOF
+fi
+
+# MEMORY.md — durable knowledge
+if [ ! -f "$NAZZAR_HOME/MEMORY.md" ]; then
+    cat > "$NAZZAR_HOME/MEMORY.md" << 'EOF'
+# 🧿 Nazar Agent — MEMORY.md
+# The agent writes durable facts here for cross-session recall.
+# Memories persist across sessions and are injected every conversation start.
+# Do not edit manually unless you want to correct or prune memory.
+EOF
+fi
+
+# USER.md — your profile
+if [ ! -f "$NAZZAR_HOME/USER.md" ]; then
+    cat > "$NAZZAR_HOME/USER.md" << 'EOF'
+# 🧿 Nazar Agent — USER.md
+# Your profile. The agent builds this over time.
+# Edit freely — this is who you are to the agent.
+
+## About You
+- Name: 
+- Role: 
+- Timezone: 
+- Languages: 
+
+## Preferences
+- Communication style: 
+- Technical depth: 
+- Response length: 
+
+## Important Context
+(Anything you want the agent to always know about you)
+EOF
+fi
+
 # ── Create nazar command ──────────────────────────────────────────────
 echo "🔗 Linking 'nazar' command..."
 mkdir -p "$HOME/.local/bin"
